@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+<a data-th-href="@{/home/verbs/verbs_list}">Back to List of Verbs</a>
+<h1>Edit</h1>
+<div data-th-if="@{errors}">
+    <h2>You have a mistake</h2>
+    <ul>
+        <li data-th-each="error: ${errors}" data-th-text="${error}"></li>
+    </ul>
+</div>
+<form method="post" data-th-action="@{edit}">
+    <label>
+        <input type="hidden" name="id" data-th-value="${verb.id}">
+    </label>
+    <label>
+        Infinitive: <br>
+        <input type="text" name="infinitive" data-th-value="${verb.infinitive}">
+    </label><br>
+    <label>
+        Verb V2: <br>
+        <input type="text" name="verb_v2" data-th-value="${verb.verb_v2}">
+    </label><br>
+    <label>
+        Verb V3: <br>
+        <input type="text" name="verb_v3" data-th-value="${verb.verb_v3}">
+    </label><br>
+    <label>
+        Verb-ing: <br>
+        <input type="text" name="ing" data-th-value="${verb.ing}">
+    </label><br>
+    <label>
+        Translate: <br>
+        <input type="text" name="translate_ua" data-th-value="${verb.translate_ua}">
+    </label><br>
+    <button type="submit">Edit</button>
+</form>
+</body>
+</html>

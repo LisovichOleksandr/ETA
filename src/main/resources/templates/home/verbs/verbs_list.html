@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>list of verbs</title>
+</head>
+<body>
+<h1>LIST OF VERBS</h1>
+<a data-th-href="@{/home/verbs/create}">+ Create</a>
+<table>
+    <thead>
+        <th>#</th>
+        <th>Infinitive</th>
+        <th>V2</th>
+        <th>V3</th>
+        <th>Ing</th>
+        <th>Translate</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </thead>
+    <tbody>
+    <tr data-th-each="verb : ${verbs}">
+        <td><a data-th-href="@{/home/verbs/{id}(id=${verb.id})}" data-th-text="${verb.id}"></a></td>
+        <td><a data-th-href="@{/home/verbs/{id}(id=${verb.id})}" data-th-text="${verb.infinitive}"></a></td>
+        <td><a data-th-href="@{/home/verbs/{id}(id=${verb.id})}" data-th-text="${verb.verb_v2}"></a></td>
+        <td><a data-th-href="@{/home/verbs/{id}(id=${verb.id})}" data-th-text="${verb.verb_v3}"></a></td>
+        <td><a data-th-href="@{/home/verbs/{id}(id=${verb.id})}" data-th-text="${verb.ing}"></a></td>
+        <td><a data-th-href="@{/home/verbs/{id}(id=${verb.id})}" data-th-text="${verb.translate_ua}"></a></td>
+        <td><a data-th-href="@{/home/verbs/{id}/edit(id=${verb.id})}">Edit</a></td>
+        <td>
+            <form method="post" data-th-action="@{/home/verbs/{id}/delete(id=${verb.id})}">
+                <button>Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

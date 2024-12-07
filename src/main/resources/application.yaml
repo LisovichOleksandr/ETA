@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/eta?currentSchema=public
+    username: eta_admin
+    password: eta
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
+      continue-on-error: false
+  #      data-location: classpath:demo.data.sql
