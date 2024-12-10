@@ -7,7 +7,7 @@
 <body>
 <a data-th-href="@{/home/verbs/verbs_list}">Back to List of Verbs</a>
 <h1>Edit</h1>
-<div data-th-if="@{errors}">
+<div data-th-if="${errors}">
     <h2>You have a mistake</h2>
     <ul>
         <li data-th-each="error: ${errors}" data-th-text="${error}"></li>

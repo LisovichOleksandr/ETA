@@ -2,6 +2,7 @@ package ua.apparatus.eta.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,12 +10,14 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ua.apparatus.eta.controller.payload.NewVerbPayload;
 import ua.apparatus.eta.model.Verb;
 import ua.apparatus.eta.service.VerbService;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping("home/verbs")
 @RequiredArgsConstructor
@@ -27,8 +30,10 @@ public class VerbsController {
     }
 
     @GetMapping("verbs_list")
-    public String getHome(Model model){
-        model.addAttribute("verbs", verbService.findAllVerbs());
+    public String getHome(Model model, @RequestParam(required = false, value = "name") String uriParam,
+                          @RequestParam(required = false, value = "id") String id){
+            log.info("URI Param is " + uriParam + " and id is " + id);
+            model.addAttribute("verbs", verbService.findAllVerbs());
         return "home/verbs/verbs_list";
     }
 

@@ -16,16 +16,6 @@ import java.util.*;
 @Repository
 @NoArgsConstructor
 public class InMemoryVerbRepository implements VerbRepository {
-//    public InMemoryVerbRepository() {
-//        List<Verb> allVerbs = JdbcRunner.getAllVerbs();
-//        verbs.addAll(allVerbs);
-//        this.verbs.add(
-//                new Verb(getId(), "enjoy", "enjoyed", "enjoyed", "enjoying", "обожнювати")
-//        );
-//        this.verbs.add(
-//                new Verb(getId(), "invoke", "invoked", "invoked", "invoking", "визивати")
-//        );
-//    }
 
     @Override
     public List<Verb> findAll() {
@@ -83,18 +73,21 @@ public class InMemoryVerbRepository implements VerbRepository {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
-                resultSet.next();
+                if (resultSet.next()) {
                 verb.setId(resultSet.getLong("id"));
                 verb.setInfinitive(resultSet.getString("infinitive"));
                 verb.setVerb_v2(resultSet.getString("verb_v2"));
                 verb.setVerb_v3(resultSet.getString("verb_v3"));
                 verb.setIng(resultSet.getString("ing"));
                 verb.setTranslate_ua(resultSet.getString("translate_ua"));
+                    return Optional.of(verb);
+                } else {
+                    return Optional.empty();
+                }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+                throw new NoSuchElementException(e);
         }
-        return Optional.of(verb);
     }
 
     public Optional<Verb> findVerbByInfinitive(String infinitive) {

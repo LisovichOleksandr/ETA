@@ -9,6 +9,9 @@ public final class ConnectionManager {
     private static final String USERNAME_KEY = "username";
     private  static final String PASSWORD_KEY = "password";  // ctrl+shift+u - TO UPPERCASE
 
+    private ConnectionManager() {
+    }
+
     public static Connection open() throws SQLException {
         try {
             return DriverManager.getConnection(PropertiesUtil.get(URL_KEY),
@@ -17,8 +20,5 @@ public final class ConnectionManager {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private ConnectionManager() {
     }
 }

@@ -7,16 +7,18 @@
 <body>
 <a data-th-href="@{/home/verbs/verbs_list}">Back to List of Verbs</a>
 <h1>Create new verb</h1>
-<div data-th-if="@{errors}">
+<div data-th-if="${errors}">
     <h2>You have a mistake</h2>
     <ul>
         <li data-th-each="error: ${errors}" data-th-text="${error}"></li>
     </ul>
 </div>
+<br>
 <form method="post" data-th-action="@{create}">
     <label>
+        Infinitive: <br>
         <input type="text" name="infinitive" data-th-value="${payload?.infinitive}">
-    </label>
+    </label><br>
     <label>
         Verb V2: <br>
         <input type="text" name="verb_v2" data-th-value="${payload?.verb_v2}">
@@ -38,54 +40,5 @@
 </body>
 </html>
 
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>New Verb</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<a data-th-href="@{/home/verbs/verbs_list}">Back to List of Verbs</a>-->
-<!--<h1>Create New Verb</h1>-->
-<!--<form method="post" data-th-action="@{create}">-->
-<!--    <div>-->
-<!--        <label>-->
-<!--            Infinitive: <br>-->
-<!--            <input type="text" name="infinitive" data-th-value="${payload?.infinitive}">-->
-<!--        </label>-->
-<!--        <div data-th-if="${errors?.infinitive}" data-th-text="${errors.infinitive}" style="color: red;"></div>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        <label>-->
-<!--            Verb V2: <br>-->
-<!--            <input type="text" name="verb_v2" data-th-value="${payload?.verb_v2}">-->
-<!--        </label>-->
-<!--        <div data-th-if="${errors?.verb_v2}" data-th-text="${errors.verb_v2}" style="color: red;"></div>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        <label>-->
-<!--            Verb V3: <br>-->
-<!--            <input type="text" name="verb_v3" data-th-value="${payload?.verb_v3}">-->
-<!--        </label>-->
-<!--        <div data-th-if="${errors?.verb_v3}" data-th-text="${errors.verb_v3}" style="color: red;"></div>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        <label>-->
-<!--            Verb-ing: <br>-->
-<!--            <input type="text" name="ing" data-th-value="${payload?.ing}">-->
-<!--        </label>-->
-<!--        <div data-th-if="${errors?.ing}" data-th-text="${errors.ing}" style="color: red;"></div>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        <label>-->
-<!--            Translate: <br>-->
-<!--            <input type="text" name="translate_ua" data-th-value="${payload?.translate_ua}">-->
-<!--        </label>-->
-<!--        <div data-th-if="${errors?.translate_ua}" data-th-text="${errors.translate_ua}" style="color: red;"></div>-->
-<!--    </div>-->
-<!--    <button type="submit">Create</button>-->
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->
 
 

@@ -3,6 +3,7 @@ package ua.apparatus.eta.controller;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,17 +14,22 @@ import ua.apparatus.eta.controller.payload.EditVerbPayload;
 import ua.apparatus.eta.model.Verb;
 import ua.apparatus.eta.service.VerbService;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.NoSuchElementException;
 
 @Controller
 @RequestMapping("home/verbs/{verbId:\\d+}")
 @RequiredArgsConstructor
 public class VerbController {
+
     private final VerbService verbService;
+
+    private final MessageSource messageSource;
 
     @ModelAttribute("verb")
     public Verb verb(@PathVariable Long verbId){
-        return this.verbService.findVerb(verbId).orElseThrow(() -> new NoSuchElementException("WORD is not found."));
+        return this.verbService.findVerb(verbId).orElseThrow(() -> new NoSuchElementException("catalog.errors.verb.not_found"));
     }
 
     @GetMapping()
@@ -33,6 +39,7 @@ public class VerbController {
 
     @GetMapping("edit")
     public String getVerbEditPage(){
+//        System.out.println("Errors: >>" + errors);
         return "home/verbs/edit";
     }
 
@@ -60,7 +67,7 @@ public class VerbController {
     }
 
     @PostMapping("delete")
-    public String deleteVerb(@ModelAttribute("verb")Verb verb){
+    public String deleteVerb(@ModelAttribute("verb") Verb verb){
         this.verbService.deleteVerb(verb.getId());
         return "redirect:/home/verbs/verbs_list";
     }
@@ -68,9 +75,11 @@ public class VerbController {
     @ExceptionHandler(NoSuchElementException.class)
     public String handleNoSuchElementException(NoSuchElementException exception,
                                                Model model,
-                                               HttpServletResponse response){
+                                               HttpServletResponse response,
+                                               Locale locale){
         response.setStatus(HttpStatus.NOT_FOUND.value());
-        model.addAttribute("error", exception.getMessage());
+        model.addAttribute("error",
+                this.messageSource.getMessage(exception.getMessage(), new Object[0], exception.getMessage(), locale));
         return "errors/404";
     }
 
