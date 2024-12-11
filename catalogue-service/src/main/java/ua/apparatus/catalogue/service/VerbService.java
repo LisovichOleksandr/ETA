@@ -1,6 +1,6 @@
-package ua.apparatus.eta.service;
+package ua.apparatus.catalogue.service;
 
-import ua.apparatus.eta.model.Verb;
+import ua.apparatus.catalogue.entity.Verb;
 
 import java.util.List;
 import java.util.Optional;

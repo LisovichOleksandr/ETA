@@ -1,4 +1,4 @@
-package ua.apparatus.eta.model;
+package ua.apparatus.catalogue.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

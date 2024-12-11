@@ -1,4 +1,4 @@
-package ua.apparatus.eta.utils;
+package ua.apparatus.catalogue.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

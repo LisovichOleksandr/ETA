@@ -1,6 +1,6 @@
-package ua.apparatus.eta.repository;
+package ua.apparatus.catalogue.repository;
 
-import ua.apparatus.eta.model.Verb;
+import ua.apparatus.catalogue.entity.Verb;
 
 import java.util.List;
 import java.util.Optional;

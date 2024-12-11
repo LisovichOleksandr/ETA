@@ -1,4 +1,4 @@
-package ua.apparatus.eta;
+package ua.apparatus.manager;
 
 /* Apparatus по мотивам села  */
 

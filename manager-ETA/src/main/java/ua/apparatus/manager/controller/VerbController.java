@@ -1,4 +1,4 @@
-package ua.apparatus.eta.controller;
+package ua.apparatus.manager.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -10,11 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-import ua.apparatus.eta.controller.payload.EditVerbPayload;
-import ua.apparatus.eta.model.Verb;
-import ua.apparatus.eta.service.VerbService;
+import ua.apparatus.manager.controller.payload.EditVerbPayload;
+import ua.apparatus.manager.entity.Verb;
+import ua.apparatus.manager.service.VerbService;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 

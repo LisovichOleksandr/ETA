@@ -1,4 +1,4 @@
-package ua.apparatus.eta.utils;
+package ua.apparatus.catalogue.utils;
 
 import java.io.IOException;
 import java.util.Properties;

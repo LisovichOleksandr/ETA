@@ -1,9 +1,9 @@
-package ua.apparatus.eta.service;
+package ua.apparatus.catalogue.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ua.apparatus.eta.model.Verb;
-import ua.apparatus.eta.repository.VerbRepository;
+import ua.apparatus.catalogue.entity.Verb;
+import ua.apparatus.catalogue.repository.VerbRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +11,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class DefaultVerbService implements VerbService{
+
     private final VerbRepository verbRepository;
 
     @Override
@@ -20,8 +21,8 @@ public class DefaultVerbService implements VerbService{
 
     @Override
     public Verb createVerb(Verb verb) {
-        verbRepository.save(verb);
-        return verb;
+        return this.verbRepository.save(verb);
+
     }
 
     @Override

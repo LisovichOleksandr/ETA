@@ -1,4 +1,4 @@
-package ua.apparatus.eta.controller.payload;
+package ua.apparatus.catalogue.controller.payload;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

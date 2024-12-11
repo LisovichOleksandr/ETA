@@ -1,10 +1,11 @@
-package ua.apparatus.eta.repository;
+package ua.apparatus.catalogue.repository;
 
 
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Repository;
-import ua.apparatus.eta.model.Verb;
-import ua.apparatus.eta.utils.ConnectionManager;
+import ua.apparatus.catalogue.entity.Verb;
+import ua.apparatus.catalogue.repository.exception.VerbAlreadyExistException;
+import ua.apparatus.catalogue.utils.ConnectionManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -62,7 +63,9 @@ public class InMemoryVerbRepository implements VerbRepository {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-        } else return verb;
+        } else {
+            throw new VerbAlreadyExistException("Таке дієслово вже існує");
+        }
     }
 
     @Override
@@ -109,7 +112,7 @@ public class InMemoryVerbRepository implements VerbRepository {
                 } else return Optional.empty();
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error retrieving verb by infinitive: " + infinitive, e);
+            throw new NoSuchElementException("Error retrieving verb by infinitive: " + infinitive, e);
         }
     }
 

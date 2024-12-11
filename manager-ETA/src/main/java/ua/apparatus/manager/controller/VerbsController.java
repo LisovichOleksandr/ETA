@@ -1,4 +1,4 @@
-package ua.apparatus.eta.controller;
+package ua.apparatus.manager.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ua.apparatus.eta.controller.payload.NewVerbPayload;
-import ua.apparatus.eta.model.Verb;
-import ua.apparatus.eta.service.VerbService;
+import ua.apparatus.manager.controller.payload.NewVerbPayload;
+import ua.apparatus.manager.entity.Verb;
+import ua.apparatus.manager.service.VerbService;
 
 import java.util.List;
 
