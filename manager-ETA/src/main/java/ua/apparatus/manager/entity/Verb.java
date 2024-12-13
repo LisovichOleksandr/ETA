@@ -1,10 +1,17 @@
 package ua.apparatus.manager.entity;
 
-public record Verb (
-        Long id,
-        String infinitive,
-        String verb_v2,
-        String verb_v3,
-        String ing,
-        String translate_ua
-        ){}
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Verb {
+    private Long id;
+    private String infinitive;
+    private String verb_v2;
+    private String verb_v3;
+    private String ing;
+    private String translate_ua;
+}

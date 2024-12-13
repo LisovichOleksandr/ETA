@@ -69,8 +69,8 @@ public class VerbRestController {
     public ResponseEntity<ProblemDetail> handlerNoSuchElementException(NoSuchElementException exception, Locale locale) {
         return ResponseEntity.badRequest()
                 .body(ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST,
-                        this.messageSource.getMessage("catalog.errors.verb.not_found",
-                                new Object[0], "catalog.errors.verb.not_found", locale)));
+                        this.messageSource.getMessage(exception.getMessage(),
+                                new Object[0], exception.getMessage(), locale)));
     }
 
 }

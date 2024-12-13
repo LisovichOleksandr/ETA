@@ -10,9 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import ua.apparatus.manager.client.VerbRestClient;
 import ua.apparatus.manager.controller.payload.EditVerbPayload;
 import ua.apparatus.manager.entity.Verb;
-import ua.apparatus.manager.service.VerbService;
 
 import java.util.Locale;
 import java.util.NoSuchElementException;
@@ -22,13 +22,13 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class VerbController {
 
-    private final VerbService verbService;
+    private final VerbRestClient verbRestClient;
 
     private final MessageSource messageSource;
 
     @ModelAttribute("verb")
-    public Verb verb(@PathVariable Long verbId){
-        return this.verbService.findVerb(verbId).orElseThrow(() -> new NoSuchElementException("catalog.errors.verb.not_found"));
+    public Verb verb(@PathVariable int verbId){
+        return this.verbRestClient.findVerb(verbId).orElseThrow(() -> new NoSuchElementException("catalog.errors.verb.not_found"));
     }
 
     @GetMapping()
@@ -60,14 +60,14 @@ public class VerbController {
             verb.setVerb_v3(payload.verb_v3());
             verb.setIng(payload.ing());
             verb.setTranslate_ua(payload.translate_ua());
-            this.verbService.updateVerb(verb);
+            this.verbRestClient.updateVerb(verb);
             return "redirect:/home/verbs/verbs_list";
         }
     }
 
     @PostMapping("delete")
     public String deleteVerb(@ModelAttribute("verb") Verb verb){
-        this.verbService.deleteVerb(verb.getId());
+        this.verbRestClient.deleteVerb(Math.toIntExact(verb.getId()));
         return "redirect:/home/verbs/verbs_list";
     }
 

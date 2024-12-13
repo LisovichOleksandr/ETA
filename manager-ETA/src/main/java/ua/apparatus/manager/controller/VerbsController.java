@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ua.apparatus.manager.client.VerbRestClient;
 import ua.apparatus.manager.controller.payload.NewVerbPayload;
 import ua.apparatus.manager.entity.Verb;
-import ua.apparatus.manager.service.VerbService;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping("home/verbs")
 @RequiredArgsConstructor
 public class VerbsController {
-    private final VerbService verbService;
+    private final VerbRestClient verbRestClient;
 
     @GetMapping()
     public String index(){
@@ -33,7 +33,7 @@ public class VerbsController {
     public String getHome(Model model, @RequestParam(required = false, value = "name") String uriParam,
                           @RequestParam(required = false, value = "id") String id){
             log.info("URI Param is " + uriParam + " and id is " + id);
-            model.addAttribute("verbs", verbService.findAllVerbs());
+            model.addAttribute("verbs", verbRestClient.findAllVerbs());
         return "home/verbs/verbs_list";
     }
 
@@ -62,7 +62,7 @@ public class VerbsController {
             verb.setVerb_v3(payload.verb_v3());
             verb.setIng(payload.ing());
             verb.setTranslate_ua(payload.translate_ua());
-            this.verbService.createVerb(verb);
+            this.verbRestClient.createVerb(verb);
             return "redirect:/home/verbs/verbs_list";
         }
     }
