@@ -14,7 +14,7 @@ public final class PropertiesUtil {
     }
 
     private static void loadProperties() {
-        try (var inputStream = PropertiesUtil.class.getClassLoader().getResourceAsStream("application.yaml")) {
+        try (var inputStream = PropertiesUtil.class.getClassLoader().getResourceAsStream("application-standalone.yaml")) {
             PROPERTIES.load(inputStream);
         } catch (IOException e) {
             throw new RuntimeException(e);

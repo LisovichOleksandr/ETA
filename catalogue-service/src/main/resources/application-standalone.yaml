@@ -1,3 +1,5 @@
+server:
+  port: 8081
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/eta?currentSchema=public
@@ -8,9 +10,6 @@ spring:
     init:
       mode: always
       continue-on-error: false
-  profiles:
-    active: standalone
-
   #      data-location: classpath:demo.data.sql
 #  Список профілів з котрими запускаеться додаток
 #  profiles:
