@@ -1,7 +1,6 @@
 package ua.apparatus.manager.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -10,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import ua.apparatus.manager.client.BadRequestException;
 import ua.apparatus.manager.client.VerbRestClient;
 import ua.apparatus.manager.controller.payload.EditVerbPayload;
 import ua.apparatus.manager.entity.Verb;
@@ -38,22 +38,14 @@ public class VerbController {
 
     @GetMapping("edit")
     public String getVerbEditPage(){
-//        System.out.println("Errors: >>" + errors);
         return "home/verbs/edit";
     }
 
     @PostMapping("edit")
     public String updateVerb(@ModelAttribute(value = "verb", binding = false) Verb verb,
-                             @Valid EditVerbPayload payload,
-                             BindingResult bindingResult,
+                             EditVerbPayload payload,
                              Model model){
-        if (bindingResult.hasErrors()){
-            model.addAttribute("payload", payload);
-            model.addAttribute("errors", bindingResult.getAllErrors().stream()
-                    .map(ObjectError::getDefaultMessage)
-                    .toList());
-            return "home/verbs/edit";
-        } else {
+        try {
             verb.setId(payload.id());
             verb.setInfinitive(payload.infinitive());
             verb.setVerb_v2(payload.verb_v2());
@@ -62,6 +54,10 @@ public class VerbController {
             verb.setTranslate_ua(payload.translate_ua());
             this.verbRestClient.updateVerb(verb);
             return "redirect:/home/verbs/verbs_list";
+        } catch (BadRequestException exception) {
+            model.addAttribute("payload", payload);
+            model.addAttribute("errors", exception.getMessage());
+            return "home/verbs/edit";
         }
     }
 

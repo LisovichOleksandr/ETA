@@ -17,7 +17,8 @@ import java.util.Optional;
 public class RestClientVerbRestClient implements VerbRestClient {
 
     // Способ доступа к типам которие здесь обьявленныйе
-    // Ето нужно для того чтобы JACKSON БИБЛИОТЕКА КОТОРАЯ ПАРСИТ JSON строки и преобразует их в офмф обьекты
+    // Ето нужно для того чтобы JACK
+    // SON БИБЛИОТЕКА КОТОРАЯ ПАРСИТ JSON строки и преобразует их в офмф обьекты
     // могла понять что  у нас список  Verb
     private static final ParameterizedTypeReference<List<Verb>> VERB_TYPE_REFERENCE =
             new ParameterizedTypeReference<>() {};
