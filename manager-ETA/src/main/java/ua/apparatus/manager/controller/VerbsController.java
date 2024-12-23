@@ -4,18 +4,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import ua.apparatus.manager.client.BadRequestException;
 import ua.apparatus.manager.client.VerbRestClient;
 import ua.apparatus.manager.controller.payload.NewVerbPayload;
 import ua.apparatus.manager.entity.Verb;
 
-import java.util.List;
 
 @Slf4j
 @Controller
@@ -30,9 +26,7 @@ public class VerbsController {
     }
 
     @GetMapping("verbs_list")
-    public String getHome(Model model, @RequestParam(required = false, value = "name") String uriParam,
-                          @RequestParam(required = false, value = "id") String id){
-            log.info("URI Param is " + uriParam + " and id is " + id);
+    public String getHome(Model model){
             model.addAttribute("verbs", verbRestClient.findAllVerbs());
         return "home/verbs/verbs_list";
     }
@@ -58,7 +52,7 @@ public class VerbsController {
         } catch (BadRequestException exception) {
            model.addAttribute("payload", payload);
            model.addAttribute("errors", exception.getMessage());
-           return "home/verbs/edit";
+           return "home/verbs/new_verb";
        }
     }
 }
