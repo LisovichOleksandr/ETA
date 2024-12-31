@@ -2,14 +2,29 @@ server:
   port: 8081
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/eta?currentSchema=public
-    username: eta_admin
-    password: eta
+    url: jdbc:postgresql://localhost:5433/postgres
+    username: postgres
+    password: postgres
     driver-class-name: org.postgresql.Driver
   sql:
     init:
       mode: always
       continue-on-error: false
+  jpa:
+    hibernate:
+      ddl-auto: update # validate - было  Ensure schema matches JPA entities
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  flyway:
+    enabled: true
+    location: classpath:db/migration
+    schemas:
+      - public
+      - words
+    baseline-on-migrate: true # Use if `catalogue` is not empty
+
   #      data-location: classpath:demo.data.sql
 #  Список профілів з котрими запускаеться додаток
 #  profiles:

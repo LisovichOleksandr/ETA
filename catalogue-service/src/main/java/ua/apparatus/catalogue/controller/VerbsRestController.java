@@ -29,7 +29,7 @@ public class VerbsRestController {
     private final MessageSource messageSource;
 
     @GetMapping
-    public List<Verb> findVerbs(){
+    public Iterable<Verb> findVerbs(){
         return this.verbService.findAllVerbs();
     }
 
